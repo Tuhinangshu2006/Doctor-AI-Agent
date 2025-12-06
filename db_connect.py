@@ -1,18 +1,24 @@
+import os
 import psycopg2
+from dotenv import load_dotenv
 
-# 1. The Single Source of Truth
-# Paste your Real Neon String here ONE LAST TIME.
-DB_URL = 'postgresql://neondb_owner:npg_KW2lhbdAto3x@ep-tiny-leaf-ae7hetx9-pooler.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
+# Load secrets from the .env file
+load_dotenv()
+
+# Get the URL securely
+DB_URL = os.getenv("DB_URL")
 
 def get_connection():
     """Returns a connection to the database."""
     try:
+        if not DB_URL:
+            print("❌ Error: DB_URL not found in .env file")
+            return None
         return psycopg2.connect(DB_URL)
     except Exception as e:
         print("❌ Connection Failed:", e)
         return None
 
-# Test it only if we run this file directly
 if __name__ == "__main__":
     conn = get_connection()
     if conn:
