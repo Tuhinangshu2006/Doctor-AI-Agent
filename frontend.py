@@ -3,7 +3,7 @@ import httpx
 
 # The URL of your FastAPI Backend
 # If you deploy to Render later, you will change this URL.
-API_URL = "http://127.0.0.1:8000"
+API_URL = "https://doctor-ai-agent.onrender.com"
 
 st.set_page_config(page_title="Doctor's AI Assistant", page_icon="🏥")
 
